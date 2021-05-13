@@ -16,5 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 
 - GridView
 - Gradientes de colores
-- Navigator: push() y pushNamed()
+- Navegación entre páginas: Navigator.push() y Navigator.pushNamed()
+- enums
+
 
