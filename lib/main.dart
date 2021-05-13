@@ -1,6 +1,6 @@
-import './category_meals_screen.dart';
+import 'screens/category_meals_screen.dart';
 
-import './categories_screen.dart';
+import 'screens/categories_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -35,6 +35,14 @@ class MyApp extends StatelessWidget {
       routes: {
         //  '/': (ctx) => CategoriesScreen(), por defecto, la ruta '/' está definida automáticamente con el campo 'home'.
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+      },
+      //onGenerateRoute se ejecuta si dirigimos a una ruta que no está registrada
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      },
+      // es como el 404 de la web, una página que se mostrará cuando no encuentra qué mostrar.
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
       },
     );
   }

@@ -1,22 +1,16 @@
-# delimeals
+# DeliMeals
 
-A new Flutter project.
+Aplicación android de guia de recetas de cocina.
 
-## Getting Started
+## Siguiendo el Curso Flutter en Udemy
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
+Este proyecto está hecho siguiendo la cuarta lección del curso ["Flutter & Dart - The Complete Guide [2021 Edition]"](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
 
 ### Algunos contenidos de la sección
 
 - GridView
+- enums
 - Gradientes de colores
 - Navegación entre páginas: Navigator.push() y Navigator.pushNamed()
-- enums
 
 
