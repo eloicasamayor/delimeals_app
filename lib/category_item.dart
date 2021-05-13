@@ -8,17 +8,31 @@ class CategoryItem extends StatelessWidget {
 
   CategoryItem(this.id, this.title, this.color);
 
-  //En general, para las apps, la navegacion entre páginas funciona como en un espacio 3D
-  // cuando vamos a una nueva página, se agrega un nuevo elemento en la lista, y el último elemento es el que se ve.
-  // push() -> añadimos una página
-  // pop() -> quitamos la última página
-  void selectCategory(BuildContext ctx) {
-    Navigator.of(ctx).push(
+  /*
+  En general, para las apps, la navegacion entre páginas funciona como en un espacio 3D
+  cuando vamos a una nueva página, se agrega un nuevo elemento en la lista, y el último elemento es el que se ve.
+  push() -> añadimos una página
+  pop() -> quitamos la última página
+
+  método .push : le pasamos MaterialPageRoute y a ella le pasamos un builder que retorna la función constructor de la nueva página.
+  Navigator.of(ctx).push(
       MaterialPageRoute(
         builder: (_) {
           return CategoryMealsScreen(id, title);
         },
       ),
+    );
+  
+  método pushNamed: le pasamos una string, definida en el atributo 'routes' de MaterialApp
+  Si necesita argumentos, podemos pasar un argumento directamente o, si son varios, se puede hacer con un map.
+  */
+  void selectCategory(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      CategoryMealsScreen.routeName,
+      arguments: {
+        'id': id,
+        'title': title,
+      },
     );
   }
 

@@ -1,4 +1,4 @@
-#Thu May 13 10:54:02 CEST 2021
+#Thu May 13 11:51:52 CEST 2021
 base.0=C\:\\Users\\eloic\\Documents\\CURSO_FLUTTER\\EJERCICIOS\\delimeals\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
