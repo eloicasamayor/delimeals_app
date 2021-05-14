@@ -52,8 +52,19 @@ class MealItem extends StatelessWidget {
     }
   }
 
+  //.pushNamed nos devuelve un Future cuando la función se ha ejecutado
+  // en este caso, el Future regresa cuando hacemos .pop() desde la página a la cual hemos hecho .pushNamed()
+  // el método .then() se ejecutará con el .pop() desde la página destino (ya sea por código o automático con la flecha "atrás" del appBar o el boton nativo de android)
+  // y  ahí es donde podemos leer los argumentos que se hayan pasado desde pop, si los hubiera.
   selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(context)
+        .pushNamed(
+      MealDetailScreen.routeName,
+      arguments: id,
+    )
+        .then((result) {
+      print(result);
+    });
   }
 
   @override

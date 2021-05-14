@@ -1,15 +1,22 @@
 import 'package:delimeals/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
-import '../dummy_data.dart';
+import '../models/meal.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+class CategoryMealsScreen extends StatefulWidget {
   // para evitar errores en los errores de las rutas a las páginas, es común
   // crear una variable static const para acceder a ella desde main.dart.
   static const routeName = '/category-meals';
   //final String categoryId;
   //final String categoryTitle;
 
-  //CategoryMealsScreen(this.categoryId, this.categoryTitle);
+  final List<Meal> availableMeals;
+  CategoryMealsScreen(this.availableMeals);
+
+  @override
+  _CategoryMealsScreenState createState() => _CategoryMealsScreenState();
+}
+
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   @override
   Widget build(BuildContext context) {
     // cuando se llama a una página mediante el pushNamed, accedemos a los argumentos mediante ModalRoute.of(context).settings.arguments
@@ -22,7 +29,7 @@ class CategoryMealsScreen extends StatelessWidget {
     // para cada meal, se incluirá o no en la nueva lista si cumple con la condición.
     // en este caso, la condicion es que su lista de categorias contenga la "categoria seleccionada" (categoryId)
     // para esto, usamos el método de List llamado .contains, el cual nos devuelve true / false si la lista contiene el elemento que le pasamos como parámetro.
-    final categoryMeals = DUMMY_MEALS.where((meal) {
+    final categoryMeals = widget.availableMeals.where((meal) {
       return meal.categories.contains(categoryId);
     }).toList();
     // ahora, categoryMeals será nuestra lista de meals de esa categoría

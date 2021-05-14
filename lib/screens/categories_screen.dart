@@ -12,27 +12,22 @@ class CategoriesScreen extends StatelessWidget {
     // gridDelegate es una función que le dice al grid cómo tiene que formatearse.
     // en este caso, SilverGrid Delegate WithMaxCrossAxisExtent nos permite decirle una width máxima y flutter se encargará de crear el grid teniendo esta anchura máxima de las celdas.
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('DeliMeal'),
-      ),
-      body: GridView(
-        padding: const EdgeInsets.all(25),
-        children: DUMMY_CATEGORIES
-            .map(
-              (catData) => CategoryItem(
-                catData.id,
-                catData.title,
-                catData.color,
-              ),
-            )
-            .toList(),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-        ),
+    return GridView(
+      padding: const EdgeInsets.all(25),
+      children: DUMMY_CATEGORIES
+          .map(
+            (catData) => CategoryItem(
+              catData.id,
+              catData.title,
+              catData.color,
+            ),
+          )
+          .toList(),
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        childAspectRatio: 3 / 2,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
       ),
     );
   }

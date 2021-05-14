@@ -1,13 +1,53 @@
-import './screens/meal_detail_screen.dart';
+import './screens/tabs_screen.dart';
 
+import './screens/meal_detail_screen.dart';
+import './screens/filters_screen.dart';
 import 'screens/category_meals_screen.dart';
 
 import 'screens/categories_screen.dart';
 import 'package:flutter/material.dart';
+import 'dummy_data.dart';
+import 'models/meal.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Map<String, bool> _filters = {
+    'gluten': false,
+    'lactose': false,
+    'vegan': false,
+    'vegetarian': false,
+  };
+
+  List<Meal> _availableMeals = DUMMY_MEALS;
+
+  void _setFilters(Map<String, bool> filtersData) {
+    setState(() {
+      _filters = filtersData;
+
+      _availableMeals = DUMMY_MEALS.where((meal) {
+        if (_filters['gluten'] && !meal.isGlutenFree) {
+          return false;
+        }
+        if (_filters['lactose'] && !meal.isLactoseFree) {
+          return false;
+        }
+        if (_filters['vegan'] && !meal.isVegan) {
+          return false;
+        }
+        if (_filters['vegetarian'] && !meal.isVegetarian) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,12 +72,17 @@ class MyApp extends StatelessWidget {
             ),
       ),
       // En el atributo 'home' de MaterialApp indicamos cuál debe ser la pantalla principal.
-      home: CategoriesScreen(),
+      home: TabsScreen(),
       //  initialRoute: '/', por defecto, la ruta inicial de la app ya es '/'. podemos cambiarla.
       routes: {
-        //  '/': (ctx) => CategoriesScreen(), por defecto, la ruta '/' está definida automáticamente con el campo 'home'.
-        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        //'/': (ctx) => TabsScreen(), por defecto, la ruta '/' está definida automáticamente con el campo 'home'.
+        CategoryMealsScreen.routeName: (ctx) =>
+            CategoryMealsScreen(_availableMeals),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        FilterScreen.routeName: (ctx) => FilterScreen(
+              _filters,
+              _setFilters,
+            ),
       },
       //onGenerateRoute se ejecuta si dirigimos a una ruta que no está registrada
       onGenerateRoute: (settings) {
