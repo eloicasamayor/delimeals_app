@@ -4,8 +4,13 @@ import './favorites_screen.dart';
 
 import './categories_screen.dart';
 import 'package:flutter/material.dart';
+import '../models/meal.dart';
 
 class TabsScreen extends StatefulWidget {
+  final List<Meal> favoriteMeals;
+
+  TabsScreen(this.favoriteMeals);
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
@@ -40,7 +45,7 @@ class _TabsScreenState extends State<TabsScreen> {
           children: [
             // los widgets que pasamos como pantallas dentro del tabBarView no deben ser Scaffolds, porque no queremos que se añada otro appBar.
             CategoriesScreen(),
-            FavoritesScreen(),
+            FavoritesScreen(widget.favoriteMeals),
           ],
         ),
       ),

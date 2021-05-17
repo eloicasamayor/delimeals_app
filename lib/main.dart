@@ -25,6 +25,37 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
+
+  //función para agregar o quitar un favorito.
+  // dada la id de un meal, lo añadirá si no existe en la lista, o lo quitará si ya está.
+  void _toggleFavorite(String mealId) {
+    // .indexWhere es un método de List que nos devuelve en qué indice de la lista se cumple cierta condición, o sea cuando la condición nos devuelve true.
+    // si nunca se cumple, nos devuelve -1.
+    // recorre cada elemento de la lista y va ejecutando una función anónima que le pasamos como parémetro.
+    final existingIndex =
+        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      //si ya existe, lo quitamos
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      //si no existe, lo agregamos
+      setState(() {
+        // .add() -> método de List para agregar un elemento a la lista
+        _favoriteMeals.add(
+          // .firstWhere() -> método de List que nos devuelve el primer elemento de la lista que cumple una condición (expresada en una función anónima que le pasamos como aragumento.)
+          DUMMY_MEALS.firstWhere((meal) => meal.id == mealId),
+        );
+      });
+    }
+  }
+
+  bool _isMealFavorite(String id) {
+    // .any() -> método de List que nos devuelve true si se cumple una condición para alguno de los elementos de la lista.
+    return _favoriteMeals.any((meal) => meal.id == id);
+  }
 
   void _setFilters(Map<String, bool> filtersData) {
     setState(() {
@@ -72,13 +103,18 @@ class _MyAppState extends State<MyApp> {
             ),
       ),
       // En el atributo 'home' de MaterialApp indicamos cuál debe ser la pantalla principal.
-      home: TabsScreen(),
+
+      // Para pasar la información de favoriteMeals a la pantalla favorites, tenemos que pasarla a tabs_screen y desde ésta, a favorites_screen.
+      home: TabsScreen(_favoriteMeals),
       //  initialRoute: '/', por defecto, la ruta inicial de la app ya es '/'. podemos cambiarla.
       routes: {
         //'/': (ctx) => TabsScreen(), por defecto, la ruta '/' está definida automáticamente con el campo 'home'.
         CategoryMealsScreen.routeName: (ctx) =>
             CategoryMealsScreen(_availableMeals),
-        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(
+              _toggleFavorite,
+              _isMealFavorite,
+            ),
         FilterScreen.routeName: (ctx) => FilterScreen(
               _filters,
               _setFilters,
