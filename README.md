@@ -13,7 +13,6 @@ In mobile apps, pages are managed as a stack. The user see the top-most page, so
 - We **push()** a page into the stack so it is the top-most page and it is visible
 - We **pop()** to go back to the previous page.
 
-
 ### Flutter Screens
 Every widget we want to use as a screen should be wrapped with a **Scaffold** widget so we can configure an appbar and some screen features.
 
@@ -66,8 +65,48 @@ routes: {
     CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
 }
 ```
+In the materialApp class we can define two arguments to avoid routing errors:
+- **onGenerateRoute**: we provide a function that returns a screen widget. This will run in case we are going pushNamed route that is not defined in the routes table.
+```dart
+onGenerateRoute: (settings) {
+    print(settings.name){
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen();)
+    }
+}
+```
+- **onUnknownRoute** is the same as onGenerate but it triggers when flutter fails to load a screen in all other methods. It's good to use it to avoid an state where the app crashes. It's like the 404 error on the web.
+
 ### pushReplacement()
 We add the new page in the stack but we remove the page below it. So we still have one page in the stack and we won't be able to go back.
+
+## Tabs
+### Tabs at the top (below the appBar)
+We create a **DefaultTabController** with a Scaffold as child. The appBar of that Scaffold can have a bottom argument, in where we put the **Tab()** widgets. As a body, in the scaffold we create a **TabBarView()** with as children as tabs we have.
+The DefaultTabController will relate each tab with each tabBarView child and will switch the tab to show the widget. The order of the tabs should match the order of the TabBarView child widgets.
+
+```dart
+DefaultTabController(
+    lenght:2,
+    child: Scaffold(
+        appBar: AppBar(
+            title: Text('Meals'),
+            bottom: TabBar(
+                tabs: [
+                    Tab(icon: Icon(Icons.category), text: 'Categories',),
+                    Tab(icon: Icon(Icons.star), text: 'Favorites',),
+                ]
+            )
+        ), 
+        body: TabBarView(
+            CategoriesScreen(),
+            FavoritesScreen(),
+            ),
+    )
+)
+```
+### Tabs at the bottom of the screen
+
+
 
 ### InkWell
 To make a widget tapable we can use the GestureDetector widget to fire the onTap event. But we can also use a InkWell, wich is a GestureDetector with a "ripple effect" a Material animation that are like waves coming from the tap.
