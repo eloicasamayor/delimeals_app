@@ -148,7 +148,8 @@ Scaffold(
 )
 ```
 
-
+## Drawer
+To add a drawer, simply we add a drawer argument into the Scaffold widget. We can asign a **Drawer()** widget, with a child that could be anything. It is that easy to build a drawer. We can have the drawer widget in a separed file so we can easily load it from different pages.
 
 ### InkWell
 To make a widget tapable we can use the GestureDetector widget to fire the onTap event. But we can also use a InkWell, wich is a GestureDetector with a "ripple effect" a Material animation that are like waves coming from the tap.
