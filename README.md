@@ -81,6 +81,7 @@ We add the new page in the stack but we remove the page below it. So we still ha
 
 ## Tabs
 ### Tabs at the top (below the appBar)
+We don't need a Statefulwidget.
 We create a **DefaultTabController** with a Scaffold as child. The appBar of that Scaffold can have a bottom argument, in where we put the **Tab()** widgets. As a body, in the scaffold we create a **TabBarView()** with as children as tabs we have.
 The DefaultTabController will relate each tab with each tabBarView child and will switch the tab to show the widget. The order of the tabs should match the order of the TabBarView child widgets.
 
@@ -105,6 +106,47 @@ DefaultTabController(
 )
 ```
 ### Tabs at the bottom of the screen
+We need a Statefulwidget.
+We use a normal Scaffold.
+We add a bottomNavigationBar argument wich takes a bottomNavigationBar widget. For this widget we should provide:
+- items: a list for the tabs. They are BottomNavigationBarItem() widgets and typically we assign them an icon and a title.
+- onTap: we provide a method that will receive automatically the index of the selected tab. In that method we have to manage the displayed screen depending on the _selectedPageIndex provided by the onTap method o the botomNavigationBar()
+- currentIndex: the variable that updates for the index of the selected tab.
+```dart
+// in the _TabsScreenState
+final List <Widget> _pages = [
+    CategoriesScreen(),
+    FavoritesScreen(),
+];
+int _selectedPageIndex = 0;
+void _selectPage(int index) {
+    setState((){
+        _selectedPageIndex = index;
+    })
+}
+// in the build method..
+Scaffold(
+    appBar: //...
+    body: _pages[_selectedPageIndex],
+    bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        background: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Theme.of(context).accentColor,
+        currentIndex: _selectedPageIndex,
+        items: [
+            BottomNavigationBarItem(
+                icon: Icons(Icons.category),
+                title: Text('categories'),
+            ),
+            BottomNavigationBarItem(
+                icon: Icons(Icons.star),
+                title: Text('favorites'),
+            ),
+        ],
+    ),
+)
+```
 
 
 
