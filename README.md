@@ -1,11 +1,11 @@
 # DeliMeals app
 > Learning Flutter: Chapter III
 
-This project was developed following a **[Flutter & Dart Course by Maximilian Schwarzmüller]**(https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/). The main learning focus is **Navigation** between screens in the app.
+This project was build following a [Flutter & Dart Course by Maximilian Schwarzmüller](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/). The main learning focus in this section is **Navigation** between screens in the app.
 
-<br>You can see the deployed app in [Github Pages](https://eloicasamayor.github.io/delimeals_app/).
+You can see the deployed app in [Github Pages](https://eloicasamayor.github.io/delimeals_app/).
 
-<br>I've been writing some notes while building the app. Here they are.
+I've been writing some notes while building the app. Here they are.
 
 # Navigation
 Navigator is a flutter class that helps us to move betwen screens. Like other classes, it needs to be connected with the context.
