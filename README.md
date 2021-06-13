@@ -1,29 +1,29 @@
-DeliMeals
+# DeliMeals app
+> Learning Flutter: Chapter III
 
-A Meals recipies guide app.
-The data is located in a local dart file, so there is no backend.
+This project was developed following a [Flutter & Dart Course by Maximilian Schwarzmüller (Academind)](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/). The main learning focus is **Navigation** between screens in the app.
 
-## Following the Flutter Course in Udemy
+> You can see the deployed app in [Github Pages](https://eloicasamayor.github.io/delimeals_app/).
 
-This project was developed following the 4th section of the ["Flutter & Dart - The Complete Guide [2021 Edition]"](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/)
+> I've been writing some notes while building the app. Here they are.
 
-## Navigation
+# Navigation
 Navigator is a flutter class that helps us to move betwen screens. Like other classes, it needs to be connected with the context.
 In mobile apps, pages are managed as a stack. The user see the top-most page, so the last page added to the stack.
 - We **push()** a page into the stack so it is the top-most page and it is visible
 - We **pop()** to go back to the previous page.
 
-### Flutter Screens
+## Flutter Screens
 Every widget we want to use as a screen should be wrapped with a **Scaffold** widget so we can configure an appbar and some screen features.
 
-### Main screen of the app
+## Main screen of the app
 In the MaterialApp widget we define the first screen should be open in the app with **the "home" argument**. There we instantiate the class of the entry point of the app, the root screen.
 The "home" screen gets automatically the route path "/". We could change that by setting another path in the "initialRoute" argument.
 
-## Pushing a screen
+# Pushing a screen
 There are several methods to go to a different place:
 
-### push()
+## push()
 In the push route we pass an instance of MaterialPageRoute (or CuppertinoPageRoute). This takes:
 - builder: to define wich widget should be built
 - fullscreenDialog: bool to have the default animation and back arrow in the appbar or have an overlay animation and a cross to close the screen.
@@ -38,7 +38,7 @@ Navigator.of(context).push(MaterialPageRoute(
   ),
 );
 ```
-### pushNamed()
+## pushNamed()
 For complex apps with various screens, there is a more convenient way to define and push screens.
 In the MaterialApp we can define a table of routes to use in all the app. This table is in fact a map with srting identifiers of routes and a builder method that returns the screen widget:
 ```dart
@@ -76,11 +76,11 @@ onGenerateRoute: (settings) {
 ```
 - **onUnknownRoute** is the same as onGenerate but it triggers when flutter fails to load a screen in all other methods. It's good to use it to avoid an state where the app crashes. It's like the 404 error on the web.
 
-### pushReplacement()
+## pushReplacement()
 We add the new page in the stack but we remove the page below it. So we still have one page in the stack and we won't be able to go back.
 
-## Tabs
-### Tabs at the top (below the appBar)
+# Tabs
+## Tabs at the top (below the appBar)
 We don't need a Statefulwidget.
 We create a **DefaultTabController** with a Scaffold as child. The appBar of that Scaffold can have a bottom argument, in where we put the **Tab()** widgets. As a body, in the scaffold we create a **TabBarView()** with as children as tabs we have.
 The DefaultTabController will relate each tab with each tabBarView child and will switch the tab to show the widget. The order of the tabs should match the order of the TabBarView child widgets.
@@ -105,7 +105,7 @@ DefaultTabController(
     )
 )
 ```
-### Tabs at the bottom of the screen
+## Tabs at the bottom of the screen
 We need a Statefulwidget.
 We use a normal Scaffold.
 We add a bottomNavigationBar argument wich takes a bottomNavigationBar widget. For this widget we should provide:
@@ -148,10 +148,10 @@ Scaffold(
 )
 ```
 
-## Drawer
+# Drawer
 To add a drawer, simply we add a drawer argument into the Scaffold widget. We can asign a **Drawer()** widget, with a child that could be anything. It is that easy to build a drawer. We can have the drawer widget in a separed file so we can easily load it from different pages.
 
-### InkWell
+# InkWell
 To make a widget tapable we can use the GestureDetector widget to fire the onTap event. But we can also use a InkWell, wich is a GestureDetector with a "ripple effect" a Material animation that are like waves coming from the tap.
 ```dart
 InkWell(
@@ -161,7 +161,7 @@ InkWell(
     child: Container(),
 )
 ```
-### Gradients
+# Gradients
 LinearGradient class provide an easy way of creating a nice color gradient:
 ```dart
 BoxDecoration(
@@ -175,14 +175,4 @@ BoxDecoration(
     )
 )
 ```
-## Other concepts
-- Tabs
-<br/>-> You can add tabs in the AppBar or at the bottom of the page.
-<br/>-> Tabs allow you to switch between stacks (no popping)
-- Drawers & Dialogs
-<br/>-> Drawers (side menus) also allow you to switch between different stacks.
-<br/>-> Drawers and other dialogs (models, alerts...) can also be closed via Navigaor.pop().
-- GridView
-- enums
-
 
